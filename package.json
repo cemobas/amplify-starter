@@ -1,27 +1,27 @@
 {
-  "name": "aws-amplify-gen2",
+  "name": "amplify-starter-monorepo",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "overrides": {
+    "zod": "3.25.17"
   },
-  "dependencies": {
-    "@aws-amplify/ui-react": "^6.15.3",
-    "aws-amplify": "^6.6.6",
-    "next": "14.2.10",
-    "react": "^18",
-    "react-dom": "^18"
+  "scripts": {
+    "dev": "npm run dev -w web",
+    "build": "npm run build -w web",
+    "start": "npm run start -w web",
+    "lint": "npm run lint -w web",
+    "mobile": "npm run start -w mobile",
+    "mobile:ios": "npm run ios -w mobile",
+    "mobile:android": "npm run android -w mobile"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.145",
     "@aws-amplify/backend": "^1.5.1",
     "@aws-amplify/backend-cli": "^1.3.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/aws-lambda": "^8.10.145",
     "aws-cdk": "^2",
     "aws-cdk-lib": "^2",
     "constructs": "^10.3.0",

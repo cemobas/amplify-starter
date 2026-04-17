@@ -12,6 +12,7 @@
 # next.js
 /.next/
 /out/
+apps/web/.next/
 
 # production
 /build
@@ -30,6 +31,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# expo
+.expo/
+apps/mobile/.expo/
 
 # typescript
 *.tsbuildinfo

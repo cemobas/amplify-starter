@@ -9,13 +9,14 @@ frontend:
   phases:
     build:
       commands:
+        - npm ci --cache .npm --prefer-offline
         - npm run build
   artifacts:
-    baseDirectory: .next
+    baseDirectory: apps/web/.next
     files:
-      - '**/*'
+      - "**/*"
   cache:
     paths:
-      - .next/cache/**/*
+      - apps/web/.next/cache/**/*
       - .npm/**/*
       - node_modules/**/*

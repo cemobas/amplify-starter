@@ -1,5 +1,6 @@
 "use client";
 
+import { randomWarsawAddress } from "@repo/shared";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -105,15 +106,6 @@ function communityFromTitle(title: string, pick: () => number) {
 function makeMockEvents(count: number, seed: number): MockEvent[] {
   const rnd = seeded(seed);
   const now = new Date();
-  const cities = [
-    "Warsaw",
-    "Kraków",
-    "Gdańsk",
-    "Wrocław",
-    "Poznań",
-    "Łódź",
-    "Katowice",
-  ];
 
   const titles = [
     "Sunset Run",
@@ -143,8 +135,7 @@ function makeMockEvents(count: number, seed: number): MockEvent[] {
     date.setDate(now.getDate() + dayOffset);
 
     const title = titles[Math.floor(rnd() * titles.length)] ?? `Event ${i + 1}`;
-    const location =
-      cities[Math.floor(rnd() * cities.length)] ?? "City Center";
+    const location = randomWarsawAddress(rnd);
 
     const hour = clamp(9 + Math.floor(rnd() * 10), 9, 20);
     const minute = rnd() > 0.7 ? "30" : "00";
@@ -227,7 +218,7 @@ function EventCard({ ev }: { ev: MockEvent }) {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(180deg, rgba(39,24,126,0.10) 0%, rgba(39,24,126,0.18) 68%, rgba(39,24,126,0.62) 86%, rgba(39,24,126,0.82) 100%)",
+              "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.14) 55%, rgba(0,0,0,0.52) 82%, rgba(0,0,0,0.82) 100%)",
           }}
         />
       </div>

@@ -25,30 +25,30 @@ type Props = {
 
 function EventCard({ ev }: { ev: MockEvent }) {
   const imageUrl = `https://picsum.photos/seed/${ev.seed}/720/540`;
-  const tagLine = ev.tags.join(" · ");
 
   return (
     <View style={tile.root}>
-      <Image source={{ uri: imageUrl }} style={tile.leadImage} />
-      <View style={tile.article}>
-        <Text style={tile.section} numberOfLines={2}>
-          {tagLine}
+      <Image source={{ uri: imageUrl }} style={tile.bgImage} />
+      <LinearGradient
+        colors={[
+          "rgba(0,0,0,0)",
+          "rgba(0,0,0,0.12)",
+          "rgba(0,0,0,0.52)",
+          "rgba(0,0,0,0.82)",
+        ]}
+        locations={[0, 0.42, 0.72, 1]}
+        start={{ x: 0.5, y: 0 }}
+        end={{ x: 0.5, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+      <View style={tile.footer}>
+        <Text style={tile.eyebrow} numberOfLines={1}>
+          {ev.date} · {ev.community}
         </Text>
-        <Text style={tile.headline} numberOfLines={3}>
+        <Text style={tile.title} numberOfLines={2}>
           {ev.title}
         </Text>
-        <Text style={tile.standfirst} numberOfLines={4}>
-          {ev.description}
-        </Text>
-        <View style={tile.ruleAccent} />
-        <View style={tile.metaRow}>
-          <Text style={tile.metaText}>{ev.date}</Text>
-          <Text style={tile.metaSep}>·</Text>
-          <Text style={tile.metaText} numberOfLines={1}>
-            {ev.community}
-          </Text>
-        </View>
-        <Text style={tile.placeLine} numberOfLines={1}>
+        <Text style={tile.place} numberOfLines={1}>
           {ev.location}
         </Text>
       </View>
@@ -227,79 +227,51 @@ const styles = StyleSheet.create({
 
 const tile = StyleSheet.create({
   root: {
+    height: 232,
     borderRadius: 16,
     overflow: "hidden",
-    backgroundColor: PALETTE.paper,
+    backgroundColor: PALETTE.indigoDeep,
     borderWidth: 1,
-    borderColor: "rgba(39,24,126,0.1)",
+    borderColor: "rgba(39,24,126,0.12)",
     shadowColor: PALETTE.indigo,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.08,
-    shadowRadius: 20,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.14,
+    shadowRadius: 22,
+    elevation: 4,
   },
-  leadImage: {
-    width: "100%",
-    height: 168,
+  bgImage: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: "cover",
     backgroundColor: "rgba(174,184,254,0.35)",
   },
-  article: {
+  footer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
     paddingHorizontal: 16,
-    paddingTop: 14,
-    paddingBottom: 16,
-  },
-  section: {
-    fontSize: 11,
-    fontFamily: FONT.semibold,
-    letterSpacing: 1.35,
-    textTransform: "uppercase",
-    color: PALETTE.periwinkle,
-    marginBottom: 6,
-  },
-  headline: {
-    fontSize: 20,
-    fontFamily: FONT.extrabold,
-    letterSpacing: -0.4,
-    lineHeight: 25,
-    color: PALETTE.indigo,
-  },
-  standfirst: {
-    marginTop: 10,
-    fontSize: 14,
-    fontFamily: FONT.regular,
-    lineHeight: 22,
-    color: "rgba(39,24,126,0.78)",
-  },
-  ruleAccent: {
-    marginTop: 14,
-    marginBottom: 10,
-    width: 40,
-    height: 3,
-    borderRadius: 2,
-    backgroundColor: PALETTE.orange,
-  },
-  metaRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
+    paddingTop: 28,
+    paddingBottom: 14,
     gap: 6,
   },
-  metaText: {
-    fontSize: 12,
-    fontFamily: FONT.medium,
-    color: "rgba(39,24,126,0.52)",
-    letterSpacing: 0.15,
+  eyebrow: {
+    fontSize: 10,
+    fontFamily: FONT.bold,
+    letterSpacing: 1.2,
+    textTransform: "uppercase",
+    color: "rgba(241,242,246,0.78)",
   },
-  metaSep: {
-    fontSize: 12,
-    fontFamily: FONT.medium,
-    color: "rgba(39,24,126,0.35)",
+  title: {
+    fontSize: 19,
+    fontFamily: FONT.extrabold,
+    letterSpacing: -0.35,
+    lineHeight: 24,
+    color: PALETTE.paper,
   },
-  placeLine: {
-    marginTop: 8,
-    fontSize: 13,
+  place: {
+    marginTop: 2,
+    fontSize: 12,
     fontFamily: FONT.semibold,
-    color: PALETTE.indigo,
-    letterSpacing: -0.1,
+    color: "rgba(241,242,246,0.88)",
   },
 });

@@ -4,3 +4,5 @@
  */
 
 export const appWorkspaceTag = "amplify-starter-monorepo";
+
+export { randomWarsawAddress } from "./randomWarsawAddress";

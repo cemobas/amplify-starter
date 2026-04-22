@@ -2,6 +2,8 @@
  * Same mock event data as `apps/web/app/events/page.tsx` (logic only, no DOM).
  */
 
+import { randomWarsawAddress } from "@repo/shared";
+
 export type Tag =
   | "sports"
   | "new"
@@ -93,15 +95,6 @@ function communityFromTitle(title: string, pick: () => number) {
 export function makeMockEvents(count: number, seed: number): MockEvent[] {
   const rnd = seeded(seed);
   const now = new Date();
-  const cities = [
-    "Warsaw",
-    "Kraków",
-    "Gdańsk",
-    "Wrocław",
-    "Poznań",
-    "Łódź",
-    "Katowice",
-  ];
 
   const titles = [
     "Sunset Run",
@@ -131,8 +124,7 @@ export function makeMockEvents(count: number, seed: number): MockEvent[] {
     date.setDate(now.getDate() + dayOffset);
 
     const title = titles[Math.floor(rnd() * titles.length)] ?? `Event ${i + 1}`;
-    const location =
-      cities[Math.floor(rnd() * cities.length)] ?? "City Center";
+    const location = randomWarsawAddress(rnd);
 
     const hour = clamp(9 + Math.floor(rnd() * 10), 9, 20);
     const minute = rnd() > 0.7 ? "30" : "00";

@@ -11,12 +11,11 @@ import {
   PlusJakartaSans_800ExtraBold,
 } from "@expo-google-fonts/plus-jakarta-sans";
 
-import { HomeScreen } from "./screens/HomeScreen";
-import { EventsScreen } from "./screens/EventsScreen";
-import { LoginScreen } from "./screens/LoginScreen";
+import { MjastoScreen } from "./screens/MjastoScreen";
+import { AlternativeRoot } from "./screens/alternative/AlternativeRoot";
 import { PALETTE } from "./lib/theme";
 
-type Route = "home" | "events" | "login";
+type Route = "mjasto" | "alternative";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,11 +26,10 @@ export default function App() {
     PlusJakartaSans_800ExtraBold,
   });
 
-  const [route, setRoute] = useState<Route>("home");
+  const [route, setRoute] = useState<Route>("mjasto");
 
-  const goHome = useCallback(() => setRoute("home"), []);
-  const goEvents = useCallback(() => setRoute("events"), []);
-  const goLogin = useCallback(() => setRoute("login"), []);
+  const goMjasto = useCallback(() => setRoute("mjasto"), []);
+  const goAlternative = useCallback(() => setRoute("alternative"), []);
 
   if (!fontsLoaded) {
     return (
@@ -45,14 +43,11 @@ export default function App() {
     <SafeAreaProvider>
       <View style={styles.root}>
         <StatusBar style="dark" />
-        {route === "home" && (
-          <HomeScreen onEvents={goEvents} onLogin={goLogin} />
+        {route === "mjasto" && (
+          <MjastoScreen onAlternative={goAlternative} />
         )}
-        {route === "events" && (
-          <EventsScreen onHome={goHome} onLogin={goLogin} />
-        )}
-        {route === "login" && (
-          <LoginScreen onClose={goHome} onSignedIn={goHome} />
+        {route === "alternative" && (
+          <AlternativeRoot onBack={goMjasto} />
         )}
       </View>
     </SafeAreaProvider>
